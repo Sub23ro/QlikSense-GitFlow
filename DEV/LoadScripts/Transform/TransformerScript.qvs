@@ -1,0 +1,29 @@
+/* This script is the transformation layer of the ipr_transition project.
+
+   This script takes the QVD's created at the extraction layer and transforms them by combining them, renaming fields
+   and adding derived columns.
+
+   When this script is run no data is loaded into the app. Instead, new QVDs are created. These QVD's will be
+   consumed by another app in the presentation app.
+ */
+
+// Include core scripts.
+$(MUST_INCLUDE=[lib://$(vScriptFiles)/Core/Subroutines.qvs]);
+$(MUST_INCLUDE=[lib://$(vScriptFiles)/Core/Functions.qvs]);
+$(MUST_INCLUDE=[lib://$(vScriptFiles)/Core/Variables.qvs]);
+
+// Set library paths
+SET vIncludesFolder = 'Transform/Includes';
+SET vTablesFolder = 'Transform/Tables';
+
+// Dimensions.
+$(MUST_INCLUDE=[lib://$(vScriptFiles)/$(vTablesFolder)/FIFA_DATA.qvs]);
+// Facts.
+
+// Store
+STORE [FIFA_DATA] INTO [lib://$(vProjectFolder)/$(vTransformedQVDsFolder)/FIFA_DATA.qvd](qvd);
+
+// Drop
+DROP TABLE [FIFA_DATA];
+
+EXIT SCRIPT;

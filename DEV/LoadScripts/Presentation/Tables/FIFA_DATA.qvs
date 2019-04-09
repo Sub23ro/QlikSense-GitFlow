@@ -1,0 +1,18 @@
+/* This script loads data for the RPT_IPR_LEGEND dimension. */
+
+// Check the necessary global variables are set.
+CALL AssertVariableExists('vProjectFolder');
+CALL AssertVariableExists('vTransformedQVDsFolder');
+
+[FIFA_DATA]:
+LOAD
+    ID,
+    Name,
+    "Age",
+    Nationality,
+    Overall,
+    Potential,
+    Club
+FROM [lib://$(vProjectFolder)/$(vTransformedQVDsFolder)/FIFA_DATA.qvd](qvd);
+
+CALL LogTableRowCount('FIFA_DATA');

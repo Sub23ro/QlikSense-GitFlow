@@ -1,0 +1,18 @@
+/* This script loads data for the FIFA_DATA table */
+
+// Check the necessary global variables are set.
+CALL AssertVariableExists('vProjectFolder');
+
+[FIFA_DATA]:
+LOAD
+    ID,
+    Name,
+    "Age",
+    Nationality,
+    Overall,
+    Potential,
+    Club
+FROM [lib://$(vProjectFolder)/Input-Data\fifa.csv]
+(txt, codepage is 1252, embedded labels, delimiter is '\t', msq);
+
+CALL LogTableRowCount('FIFA_DATA');

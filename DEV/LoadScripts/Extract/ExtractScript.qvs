@@ -1,0 +1,22 @@
+// Include core scripts.
+$(MUST_INCLUDE=[lib://$(vScriptFiles)/Core/Subroutines.qvs]);
+$(MUST_INCLUDE=[lib://$(vScriptFiles)/Core/Functions.qvs]);
+$(MUST_INCLUDE=[lib://$(vScriptFiles)/Core/Variables.qvs]);
+
+// Set library paths.
+SET vIncludesFolder = 'Extract/Includes';
+SET vTablesFolder = 'Extract/Tables';
+
+// Include local variables
+$(MUST_INCLUDE=[lib://$(vScriptFiles)/$(vIncludesFolder)/Variables.qvs]);
+
+// Dimensions.
+$(MUST_INCLUDE=[lib://$(vScriptFiles)/$(vTablesFolder)/FIFA_DATA.qvs]);
+// Fact.
+
+
+// Store.
+STORE [FIFA_DATA] INTO [lib://$(vProjectFolder)/$(vRawQVDsFolder)/FIFA_DATA.qvd](qvd);
+
+// Drop.
+DROP TABLE FIFA_DATA;

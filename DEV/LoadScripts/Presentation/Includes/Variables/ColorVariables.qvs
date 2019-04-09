@@ -1,0 +1,36 @@
+/* This script includes the different colours include in the apps according to our standard colour palette. */
+
+// standard colour vars
+SET vColorRed   	= '#ff6666';
+SET vJnJColorRed   	= '#f30617';
+SET vColorGreen   	= '#46c646';
+SET vColorGrey   	= '#E5E5E5';
+SET vColorWhite     	= '#FFFFFF';
+SET vColorYellow	= '#FFC200';
+SET vDarkGrey 		= '#989898';
+
+// specific colour shades Red, Yellow, Green, Blue
+SET vR1              = Rgb(251,122,131);
+SET vR2              = Rgb(252,92,104);
+SET vR3              = Rgb(243,6,23);
+SET vR4              = Rgb(137,0,10);
+SET vR5              = Rgb(101,0,7);
+
+SET vY1              = Rgb(255,248,122);
+SET vY2              = Rgb(255,246,93);
+SET vY3              = Rgb(249,236,6);
+SET vY4              = Rgb(141,133,0);
+SET vY5              = Rgb(104,98,0);
+
+SET vG1              = Rgb(174,250,120);
+SET vG2              = Rgb(152,242,89);
+SET vG3              = Rgb(94,220,5);
+SET vG4              = Rgb(52,124,0);
+SET vG5              = Rgb(38,92,0);
+
+SET vB1              = Rgb(124,186,241);
+SET vB2              = Rgb(0,0,134);
+SET vB3              = Rgb(15,92,161);
+SET vB4              = Rgb(1,49,91);
+SET vB5              = Rgb(0,36,67);
+
