@@ -1,0 +1,7 @@
+/*
+	This file contains shared functions for use across all the layers.
+	Add freely to this file. When it grows too large it should be split among multiple files in a child directory.
+	Every function should start with an 'f'.
+*/
+
+//-------------------------------------------- Functions ----------------------------------------------------//

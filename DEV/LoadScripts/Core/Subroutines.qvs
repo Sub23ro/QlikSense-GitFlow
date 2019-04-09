@@ -1,0 +1,109 @@
+/*
+	This file contains shared subroutines for use across all the layers.
+	Add freely to this file. When it grows too large it should be split among multiple files in a child directory.
+*/
+
+//-------------------------------------------- Subroutines ----------------------------------------------------//
+SUB LogTableRowCount (vTableName)
+
+ LET vNumRows = NoOfRows(vTableName);
+ IF IsNull(vNumRows) THEN
+      TRACE $(vTableName) is not a valid table.;
+    ELSE
+      TRACE $(vNumRows) rows have been loaded into $(vTableName).;
+ END IF;
+
+ vNumRows=;
+
+END SUB;
+
+SUB WriteTableStats(vTableName)
+
+FOR i = 1 TO NoOfFields('$(vTableName)')
+
+    LET vField = FieldName($(i),'$(vTableName)');
+
+    [TableStats]:
+    LOAD
+     '$(vTableName)' AS 'Table Name',
+     '$(vField)' AS 'Field Name',
+     Count($(vField)) AS 'Count',
+     NullCount($(vField)) AS 'Null Count',
+     Count(DISTINCT $(vField)) AS 'Distinct Count',
+     MinString($(vField)) AS 'MinString',
+     MaxString($(vField)) AS 'MaxString',
+     Mode($(vField)) AS 'Mode',
+     Avg($(vField)) AS 'Avg',
+     Sum($(vField)) AS 'Sum',
+     Max($(vField)) AS 'Max',
+     Min($(vField)) AS 'Min'
+    RESIDENT $(vTableName);
+NEXT i
+
+END SUB;
+
+SUB CreateAuditTable
+
+//Iterate through the loaded tables
+    FOR t = 0 TO NoOfTables() - 1
+       CALL WriteTableStats(TableName($(t)));
+    NEXT t;
+END SUB;
+
+/* Checks if a table exists, and if it doesn't then it prints and error and exits the script. */
+SUB AssertTableExists (vTableName)
+
+ IF IsNull(TableNumber('$(vTableName)')) THEN
+      TRACE ERROR! AssertTableExists failed - Table $(vTableName) does not exist.;
+      EXIT SCRIPT;
+ END IF;
+
+END SUB;
+
+/* Checks if a field exists in a table and prints and error and exits the script if it doesn't. */
+SUB AssertFieldExists (vFieldName, vTableName)
+
+ IF IsNull(TableNumber('$(vTableName)'))  THEN
+      TRACE ERROR! Assert AssertFieldExists failed - Table $(vTableName) does not exist.;
+      EXIT SCRIPT;
+ END IF;
+
+ LET vFieldNumber = FieldNumber('$(vFieldName)','$(vTableName)');
+ IF vFieldNumber = 0 THEN
+   TRACE ERROR! Assert AssertFieldExists failed - Field $(vFieldName) does not exist in the table $(vTableName).;
+   EXIT SCRIPT;
+ END IF;
+
+ vFieldNumber=;
+
+END SUB;
+
+SUB AssertVariableExists(vVariable)
+
+  IF Len(Trim($(vVariable))) = 0 THEN
+    TRACE ERROR! Assert AssertVariableExists failed - Variable $(vVariable) does not exist.;
+    EXIT SCRIPT;
+  END IF
+
+END SUB
+
+SUB ListColumnsInTable(vTableName)
+
+  LET vNumFields = NoOfFields('$(vTableName)');
+
+  TRACE The following columns are found in the table $(vTableName):;
+
+  LET vFieldName = '';
+  FOR vFieldNo = 1 TO vNumFields;
+    vFieldName = vFieldName & '[' & FieldName(vFieldNo, '$(vTableName)') & '], ';
+  NEXT vFieldNo;
+
+  // Remove trailing ','   //TODO Why does this break the load scrupt so badly
+  // vFieldName = Left(vFieldName, 4);
+
+  TRACE $(vFieldName);
+
+  vFieldNo=;
+  vNumFields=;
+  vFieldName=;
+END SUB

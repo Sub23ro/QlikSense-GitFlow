@@ -1,0 +1,23 @@
+/* This script is the presentation layer for the Main app of the ipr_transition project.
+
+   This script takes the QVDs from the transformation layer and loads them into the app for visualization.
+ */
+
+// Include core scripts.
+$(MUST_INCLUDE=[lib://$(vScriptFiles)/Core/Subroutines.qvs]);
+$(MUST_INCLUDE=[lib://$(vScriptFiles)/Core/Functions.qvs]);
+$(MUST_INCLUDE=[lib://$(vScriptFiles)/Core/Variables.qvs]);
+
+// Set library paths.
+SET vIncludesFolder = 'Presentation/Includes';
+SET vTablesFolder = 'Presentation/Tables';
+
+// Include local variables.
+$(MUST_INCLUDE=[lib://$(vScriptFiles)/$(vIncludesFolder)/Variables.qvs]);
+
+// Dimensions
+$(MUST_INCLUDE=[lib://$(vScriptFiles)/$(vTablesFolder)/FIFA_DATA.qvs]);
+
+// Facts
+
+EXIT SCRIPT;

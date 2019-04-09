@@ -1,0 +1,6 @@
+/* This file contains shared variables for use across all the layers. */
+
+CALL AssertVariableExists('vEnvironment');
+LET vRawQVDsFolder = '$(vEnvironment)/QVD/Raw';
+LET vFlatFilesFolder = '$(vEnvironment)/FlatFiles';
+LET vTransformedQVDsFolder = '$(vEnvironment)/QVD/Transformed';

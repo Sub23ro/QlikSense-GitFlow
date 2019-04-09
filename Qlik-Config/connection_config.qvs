@@ -1,0 +1,17 @@
+// This is a template file for config for the ipr_transition project.
+// The variables in this file define which data connections the apps should be used.
+//
+// The apps will expect this file (without the .template) to be found in c:/qlik_config/ipr_transition/
+
+// If the apps cannot find this file then they will not be able to reload.
+LET vProjectFolder = 'QGF_Folder_Akshay';    // Raw data folder connection
+LET vEnvironment = 'DEV';             // Environment is defined here
+//SET vDataSourceSchema = '';
+//SET vReportingDB = 'TEMP_PROD';
+
+// Script files is created from the previous variables
+LET vScriptFiles = '$(vProjectFolder)/$(vEnvironment)/LoadScripts';
+
+// Setting date variables improves our ability to test the dashboard.
+//SET vToday = Date#('2017-10-10', 'YYYY-MM-DD');
+SET vToday = Today();
